@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chill It · Rendimiento Creativo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <div class="brand-text">
+      <h1>Rendimiento Creativo</h1>
+      <p>Chill It · solo lectura</p>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="segmented" id="market-select" role="tablist" aria-label="Mercado">
+      <button data-value="es" class="active" role="tab" aria-selected="true">🇪🇸 España</button>
+      <button data-value="mx" role="tab" aria-selected="false">🇲🇽 México</button>
+    </div>
+
+    <div class="segmented" id="range-select" role="tablist" aria-label="Período">
+      <button data-value="today" class="active" role="tab" aria-selected="true">Hoy</button>
+      <button data-value="yesterday" role="tab" aria-selected="false">Ayer</button>
+      <button data-value="7d" role="tab" aria-selected="false">Últimos 7 días</button>
+      <button data-value="30d" role="tab" aria-selected="false">Último mes</button>
+    </div>
+  </div>
+</header>
+
+<div class="subbar">
+  <div class="summary" id="summary">
+    <!-- métricas totales del período, inyectadas por JS -->
+  </div>
+
+  <div class="sort-wrap">
+    <label for="sort-select">Ordenar por</label>
+    <select id="sort-select">
+      <option value="spend">Gasto (mayor a menor)</option>
+      <option value="cost_per_result">Costo por resultado (menor a mayor)</option>
+      <option value="result_count">Resultados (mayor a menor)</option>
+      <option value="ctr">CTR (mayor a menor)</option>
+    </select>
+    <span class="freshness" id="freshness" title="El dashboard es solo de lectura y se actualiza solo">—</span>
+  </div>
+</div>
+
+<main id="main">
+  <div class="state state-loading" id="state-loading">
+    <div class="spinner" aria-hidden="true"></div>
+    <p>Trayendo los datos de Meta…</p>
+  </div>
+
+  <div class="state state-error" id="state-error" hidden>
+    <p class="state-title">No pudimos traer los datos</p>
+    <p class="state-detail" id="error-detail"></p>
+    <button id="retry-btn">Reintentar</button>
+  </div>
+
+  <div class="state state-empty" id="state-empty" hidden>
+    <p class="state-title">No hay datos para este período</p>
+    <p class="state-detail">Probá con otro rango de fechas o mercado.</p>
+  </div>
+
+  <div class="grid" id="grid" hidden></div>
+</main>
+
+<footer class="footer">
+  <span>Solo visualización — este panel no puede modificar anuncios, presupuestos ni campañas.</span>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
